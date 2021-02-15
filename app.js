@@ -4,26 +4,25 @@ const searchBtn = () => {
 }
 
 const fetchSongInfo = async songName => {
-    const apiBase = 'https://api.lyrics.ovh/suggest/';
+    const apiBase = 'https://api.lrics.ovh/suggest/';
     const url = `${apiBase}${songName}`;
     try {
         const res = await fetch(url);
         const data = await res.json();
         showSongResult(data);
     } catch (error) {
-        errorMessage();
+        errorMessage("Invalid Input");
     }
 }
 //error handler
-const errorMessage = () => {
+const errorMessage = (error) => {
     const errorText = document.getElementById("error-message");
     errorText.style.display = "block";
-    errorText.innerText = "Sorry, song Not Found";
-    console.log(error);
+    errorText.innerText = error;
 }
 const showSongResult = result => {
-    const errorText = document.getElementById("error-message");
-    errorText.style.display = "none";
+    // const errorText = document.getElementById("error-message");
+    // errorText.style.display = "none";
     const allSong = result.data;
     const songContainer = document.getElementById("songs-container");
     songContainer.innerHTML = '';
